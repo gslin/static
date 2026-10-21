@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Church 與 Hanks（1990）〈詞語聯想常模、互資訊與詞典編纂〉全文繁體中文譯文，含公式、表格及註釋。">
+  <meta name="author" content="Kenneth Ward Church; Patrick Hanks">
+  <meta name="theme-color" content="#f5f4ef">
+  <title>詞語聯想常模、互資訊與詞典編纂｜Church &amp; Hanks, 1990</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <style>
+:root {
+  color-scheme: light;
+  font-size: 125%;
+  --paper: #fffefb;
+  --background: #f5f4ef;
+  --ink: #252c2b;
+  --muted: #65706c;
+  --accent: #23594d;
+  --line: #dedfd6;
+  --tint: #edf2ec;
+  --sans: "Noto Sans TC", "Noto Sans CJK TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --serif: "Noto Serif TC", "Noto Serif CJK TC", "Songti TC", "PMingLiU", serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+body { margin: 0; background: var(--background); color: var(--ink); font-family: var(--sans); }
+::selection { background: #cce0cf; color: #17382f; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: .22em; }
+a:hover { color: #122f26; }
+:focus-visible { outline: 3px solid #b47839; outline-offset: 4px; }
+[hidden] { display: none !important; }
+.skip-link { position: fixed; top: -100px; left: 1rem; z-index: 10; padding: .7rem 1rem; background: var(--paper); }
+.skip-link:focus { top: 1rem; }
+.reading-progress { position: fixed; inset: 0 0 auto; z-index: 5; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+.layout { display: grid; grid-template-columns: 245px minmax(0, 850px); gap: 54px; max-width: 1230px; margin: 0 auto; padding: 54px 28px 80px; align-items: start; }
+.sidebar { position: sticky; top: 32px; max-height: calc(100vh - 64px); overflow-y: auto; scrollbar-width: thin; padding-right: 14px; }
+.paper-id { margin: 0 0 6px; font-size: .72rem; font-weight: 700; letter-spacing: .16em; color: var(--accent); }
+.sidebar-title { display: block; margin-bottom: 24px; font-family: var(--serif); font-size: 1.12rem; font-weight: 600; text-decoration: none; }
+.toc summary { padding: 14px 0 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; letter-spacing: .12em; cursor: pointer; }
+.toc nav { margin-left: -10px; }
+.toc ol { margin: 0; padding: 0; list-style: none; }
+.toc a { display: flex; gap: 10px; align-items: baseline; margin: 2px 0; padding: 7px 10px; border-left: 2px solid transparent; color: #5c6761; font-size: .79rem; line-height: 1.55; text-decoration: none; }
+.toc a:hover { color: var(--accent); background: #ecefe7; }
+.toc a[aria-current="location"] { color: var(--accent); background: #e6ede3; border-left-color: var(--accent); font-weight: 600; }
+.toc .number { width: 1.55rem; flex: 0 0 1.55rem; font-size: .69rem; font-variant-numeric: tabular-nums; color: #738679; }
+.toc .subsection a { padding-left: 19px; font-size: .74rem; }
+.sidebar-footer { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 16px; }
+.read-status { display: flex; justify-content: space-between; color: var(--muted); font-size: .73rem; margin-bottom: 14px; }
+.print-button { width: 100%; background: transparent; color: var(--accent); border: 1px solid #bcc9bf; border-radius: 4px; padding: 10px 14px; font: inherit; font-size: .78rem; cursor: pointer; }
+.print-button:hover { background: var(--tint); }
+.sidebar-source { display: inline-block; margin-top: 15px; font-size: .74rem; }
+main { min-width: 0; background: var(--paper); border: 1px solid #e4e4db; padding: 55px 56px 40px; }
+.paper-header { border-bottom: 1px solid var(--line); margin-bottom: 34px; padding-bottom: 28px; }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; font-size: .66rem; letter-spacing: .11em; color: var(--accent); font-weight: 600; }
+.language { border: 1px solid #ccd7cb; padding: 3px 8px; border-radius: 2px; letter-spacing: .06em; }
+h1 { margin: 25px 0 18px; font-family: var(--serif); font-size: clamp(1.85rem, 3.1vw, 2.55rem); font-weight: 700; line-height: 1.55; letter-spacing: .035em; }
+.original-title { max-width: 600px; color: var(--muted); font-family: Georgia, serif; font-size: 1.02rem; line-height: 1.65; }
+.original-title em { font-style: normal; }
+.authors { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 26px 0 20px; }
+.authors p { margin: 0; font-size: .76rem; line-height: 1.9; color: var(--muted); }
+.authors strong { color: var(--ink); font-size: .85rem; font-weight: 600; }
+.publication { font-size: .72rem; line-height: 1.95; color: var(--muted); }
+.translation-notes { margin-top: 21px; font-size: .75rem; line-height: 1.95; color: var(--muted); }
+.translation-notes summary { cursor: pointer; color: var(--accent); }
+.translation-notes p { margin: 12px 0 0; }
+.article-body { font-family: var(--serif); font-size: 1.045rem; line-height: 2.04; overflow-wrap: anywhere; }
+.article-body > section { margin-top: 45px; }
+.article-body > section:first-child { margin-top: 0; }
+.article-body p { margin: 0 0 1.35em; }
+h2, h3 { font-family: var(--sans); line-height: 1.7; scroll-margin-top: 2rem; }
+h2 { font-size: 1.2rem; font-weight: 600; padding-bottom: 12px; margin: 0 0 22px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 1.05rem; margin: 35px 0 18px; }
+.section-number { margin-right: .75em; font-family: Georgia, serif; font-weight: 400; font-size: 1.07em; color: #789080; }
+#abstract-section { padding: 24px 26px 5px; background: var(--tint); border-top: 2px solid var(--accent); }
+#abstract-section h2 { border: 0; padding: 0; margin-bottom: 13px; font-size: .94rem; color: var(--accent); }
+#abstract-section p { font-size: .96rem; }
+blockquote { margin: 24px 0; padding: 2px 0 2px 20px; border-left: 3px solid #bdcbbc; color: #4d5a50; }
+blockquote p:last-child { margin-bottom: 0; }
+.translator-note { font-family: var(--sans); font-size: .77rem; line-height: 1.95; color: var(--muted); border-left: 2px solid #c9c9b5; padding: 12px 16px; background: #f6f5ef; }
+.article-body ul, .article-body ol { padding-left: 1.55rem; margin-bottom: 1.5em; }
+.article-body li { padding-left: .2rem; margin-bottom: .4em; }
+code, pre { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .85em; }
+code { padding: .12em .25em; background: #f0f1eb; border-radius: 3px; overflow-wrap: anywhere; }
+pre { padding: 20px; line-height: 1.85; background: #f3f3ed; border: 1px solid var(--line); border-radius: 3px; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { padding: 0; background: transparent; }
+.math.inline { font-family: Georgia, serif; }
+.math.block { margin: 28px 0; padding: 25px 16px; border-block: 1px solid var(--line); background: #f9faf5; text-align: center; overflow-x: auto; font-family: Georgia, serif; font-size: .96rem; }
+.katex { font-size: 1.08em; }
+.katex-display { margin: 0; }
+.math.block .katex-display > .katex { white-space: nowrap; }
+.table-scroll { margin: 20px 0 26px; overflow-x: auto; max-width: 100%; border: 1px solid var(--line); border-radius: 3px; scrollbar-width: thin; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: .76rem; line-height: 1.8; font-variant-numeric: tabular-nums; }
+th { background: #edf1e9; font-weight: 600; color: #355344; text-align: left; }
+th, td { padding: 10px 12px; border-bottom: 1px solid #e6e7df; vertical-align: top; }
+tbody tr:nth-child(even) { background: #f8f9f4; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: #edf3e8; }
+.numeric-table { min-width: 500px; }
+.numeric-table th, .numeric-table td { white-space: nowrap; }
+.examples-table { min-width: 580px; table-layout: fixed; }
+.examples-table th, .examples-table td { width: 50%; overflow-wrap: anywhere; }
+.examples-table code { background: transparent; padding: 0; line-height: 1.85; font-size: .94em; }
+.table-caption, .figure-caption { margin: 28px 0 12px !important; font-family: var(--sans); font-size: .83rem; line-height: 1.85; color: var(--accent); scroll-margin-top: 2rem; }
+.figure-caption { border-top: 2px solid #b5c6b3; padding-top: 18px; margin-top: 35px !important; }
+.footnote-ref { line-height: 0; }
+.footnote-ref a { padding: 0 .16em; font-family: var(--sans); font-weight: 600; text-decoration: none; }
+.footnotes-sep { display: none; }
+.footnotes { font-family: var(--sans); font-size: .82rem; line-height: 1.95; }
+.footnotes ol { padding-left: 1.7rem; }
+.footnotes li { padding: 8px 6px; scroll-margin-top: 2rem; }
+.footnotes li:target { background: #eaf0e4; }
+.footnotes p { margin-bottom: 0; }
+.footnote-backref { font-family: var(--sans); padding: 4px; }
+.article-body > section[aria-labelledby="references"] ol { font-size: .85rem; line-height: 1.9; }
+.article-body > section[aria-labelledby="references"] li { margin-bottom: 1.2em; }
+.paper-footer { border-top: 1px solid var(--line); margin-top: 45px; padding-top: 22px; display: flex; justify-content: space-between; gap: 20px; font-size: .72rem; color: var(--muted); }
+@media (min-width: 1001px) {
+  .toc summary { list-style: none; pointer-events: none; }
+  .toc summary::-webkit-details-marker { display: none; }
+}
+@media (max-width: 1000px) {
+  .layout { display: block; max-width: 830px; padding: 25px 22px 50px; }
+  .sidebar { position: static; padding: 0; max-height: none; overflow: visible; }
+  .paper-id { display: inline; margin-right: 12px; }
+  .sidebar-title { display: inline; font-size: .94rem; }
+  .toc { margin: 17px 0 20px; border-bottom: 1px solid var(--line); }
+  .toc summary { padding: 12px 0; letter-spacing: .03em; font-size: .8rem; }
+  .toc nav { padding-bottom: 12px; margin-left: 0; }
+  .toc ol { columns: 2; column-gap: 16px; }
+  .toc li { break-inside: avoid; }
+  .sidebar-footer { display: none; }
+  main { padding: 40px 40px 32px; }
+}
+@media (max-width: 540px) {
+  .layout { padding: 22px 16px 35px; }
+  .sidebar { padding: 0 4px; }
+  .paper-id { font-size: .64rem; }
+  .sidebar-title { font-size: .85rem; }
+  .toc ol { columns: 1; }
+  main { padding: 28px 20px 26px; }
+  .eyebrow { font-size: .59rem; gap: 10px; }
+  h1 { font-size: 1.62rem; letter-spacing: 0; margin-top: 22px; }
+  .original-title { font-size: .91rem; }
+  .authors { grid-template-columns: 1fr; gap: 14px; }
+  .article-body { font-size: 1rem; line-height: 2; }
+  h2 { font-size: 1.09rem; }
+  h3 { font-size: .99rem; }
+  #abstract-section { padding: 20px 18px 3px; }
+  blockquote { padding-left: 15px; }
+  .translator-note { padding: 12px; }
+  th, td { padding: 9px 11px; }
+  .paper-footer { flex-direction: column; gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@page { size: A4; margin: 19mm 17mm; }
+@media print {
+  :root { font-size: 100%; --ink: #000; --muted: #444; --accent: #222; --line: #ccc; }
+  html { scroll-behavior: auto; }
+  body { background: #fff; }
+  .layout { display: block; max-width: none; margin: 0; padding: 0; }
+  .sidebar, .reading-progress, .skip-link, .back-to-top { display: none !important; }
+  main { padding: 0; border: 0; background: #fff; }
+  .paper-header { padding-bottom: 15px; margin-bottom: 25px; }
+  h1 { font-size: 24pt; }
+  .authors { grid-template-columns: 1fr 1fr; }
+  .article-body { font-size: 10.5pt; line-height: 1.8; }
+  .article-body > section { margin-top: 22px; }
+  h2 { font-size: 13pt; }
+  h3 { font-size: 11.5pt; }
+  h2, h3, .table-caption, .figure-caption { break-after: avoid; }
+  p { orphans: 3; widows: 3; }
+  .table-scroll { overflow: visible; border-radius: 0; }
+  .numeric-table, .examples-table { min-width: 0; }
+  th, td { padding: 6px 7px; white-space: normal !important; }
+  table { font-size: 8pt; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  .math.block { break-inside: avoid; overflow: visible; padding: 16px 8px; }
+  a { color: inherit; }
+  .paper-footer { font-size: 8pt; }
+  .footnote-backref { display: none; }
+}
+
+  </style>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#article">跳至正文</a>
+  <div class="reading-progress" aria-hidden="true"></div>
+  <div class="layout">
+    <aside class="sidebar" aria-label="閱讀導覽">
+      <p class="paper-id">J90–1003 / 1990</p>
+      <a class="sidebar-title" href="#top">詞語聯想與詞典編纂</a>
+      <details class="toc" open>
+        <summary>本文目錄</summary>
+        <nav aria-label="章節目錄">
+          <ol><li><a href="#abstract"><span class="number" aria-hidden="true"></span><span>摘要</span></a></li><li><a href="#section-1"><span class="number" aria-hidden="true">1</span><span>意義與聯想</span></a></li><li><a href="#section-2"><span class="number" aria-hidden="true">2</span><span>實務應用</span></a></li><li><a href="#section-3"><span class="number" aria-hidden="true">3</span><span>詞語聯想與心理語言學</span></a></li><li><a href="#section-4"><span class="number" aria-hidden="true">4</span><span>以資訊理論為基礎的量度</span></a></li><li><a href="#section-5"><span class="number" aria-hidden="true">5</span><span>詞彙句法規律</span></a></li><li><a href="#section-6"><span class="number" aria-hidden="true">6</span><span>以詞性標記器進行前處理</span></a></li><li><a href="#section-7"><span class="number" aria-hidden="true">7</span><span>以句法剖析器進行前處理</span></a></li><li><a href="#section-8"><span class="number" aria-hidden="true">8</span><span>詞典編纂上的應用</span></a></li><li class="subsection"><a href="#section-8-1"><span class="number" aria-hidden="true">8.1</span><span>例一：「save … from」</span></a></li><li class="subsection"><a href="#section-8-2"><span class="number" aria-hidden="true">8.2</span><span>例二：辨識語意類別</span></a></li><li><a href="#section-9"><span class="number" aria-hidden="true">9</span><span>結論</span></a></li><li><a href="#references"><span class="number" aria-hidden="true"></span><span>參考文獻</span></a></li><li><a href="#notes"><span class="number" aria-hidden="true"></span><span>原文註釋</span></a></li></ol>
+        </nav>
+      </details>
+      <div class="sidebar-footer">
+        <div class="read-status" hidden><span>閱讀進度</span><span id="reading-percent">0%</span></div>
+        <button class="print-button" type="button" hidden>列印／另存 PDF</button>
+        <a class="sidebar-source" href="https://aclanthology.org/J90-1003.pdf">閱讀原文 PDF ↗</a>
+      </div>
+    </aside>
+    <main id="article" tabindex="-1">
+      <article aria-labelledby="paper-title">
+        <header class="paper-header">
+          <div class="eyebrow"><span>COMPUTATIONAL LINGUISTICS · 1990</span><span class="language">繁體中文全文</span></div>
+          <h1 id="paper-title">詞語聯想常模、<br>互資訊與詞典編纂</h1>
+          <div class="original-title"><p>原題：<em lang="en">Word Association Norms, Mutual Information, and Lexicography</em></p></div>
+          <div class="authors"><p><strong>Kenneth Ward Church</strong><br/>
+貝爾實驗室，美國紐澤西州 Murray Hill</p><p><strong>Patrick Hanks</strong><br/>
+Collins 出版社，蘇格蘭格拉斯哥</p></div>
+          <div class="publication"><p>刊載於：<em>Computational Linguistics</em>，第 16 卷第 1 期，1990 年 3 月，第 22–29 頁。<br/>
+原文：<a href="https://aclanthology.org/J90-1003/">ACL Anthology 論文頁面</a>；<a href="https://aclanthology.org/J90-1003.pdf">PDF</a>。</p></div>
+          <details class="translation-notes">
+            <summary>翻譯說明與授權</summary>
+            
+<p>翻譯說明：本檔為全文繁體中文譯文。英文例詞、詞性標記、語意標記、公式與表格數值予以保留；圖 1、圖 2 改排為文字表格，附上例句翻譯。圖中原本截斷的上下文以「…」表示，不補寫缺文。原稿中可確認的不一致處另加「譯註」。參考文獻保留原文書目資訊，並附題名中譯。</p>
+<p>授權：依 <a href="https://aclanthology.org/faq/#what-is-the-copyright-for-materials-in-the-acl-anthology">ACL Anthology 著作權說明</a>，2016 年以前的 ACL 著作採 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons 姓名標示—非商業性—相同方式分享 3.0 未本地化授權（CC BY-NC-SA 3.0）</a>。原作著作權歸 ACL 所有；本譯文依相同授權提供。改作內容為繁體中文翻譯、HTML 排版與明示的譯註。</p>
+
+          </details>
+        </header>
+        <div class="article-body">
+<section aria-labelledby="abstract" id="abstract-section"><h2 id="abstract" tabindex="-1">摘要</h2>
+<p>心理語言學文獻中的「詞語聯想」（word association）具有相當特定的意義。（一般而言，如果 <em>nurse</em>〔護士〕出現在 <em>doctor</em>〔醫師〕這類高度相關的詞之後，受試者對它的反應會比平常快。）我們將擴展這個詞的意義，作為以統計方式描述各種值得研究的語言現象之基礎。這些現象包括 <em>doctor/nurse</em> 類型的語意關係（實詞／實詞），以及動詞與介系詞之間的詞彙句法共現限制（實詞／功能詞）。本文將根據資訊理論中的互資訊概念，提出一項客觀量度，用以從電腦可讀的語料庫估計詞語聯想常模。（取得詞語聯想常模的標準方法，是讓數千名受試者接受數百個詞的測試；這種方法既昂貴，也不可靠。）我們提出的量度稱為「關聯比」（association ratio），直接從電腦可讀的語料庫估計詞語聯想常模，使數萬個詞的常模估計成為可能。</p>
+</section><section aria-labelledby="section-1"><h2 id="section-1" tabindex="-1"><span class="section-number">1</span>意義與聯想</h2>
+<p>語言學通常不只根據詞義，也根據詞與其他詞的共現情形來分類詞語。例如，貫穿整個 Firth 學派傳統的主張，就是「從一個詞相伴出現的詞語，便能認識這個詞」（Firth，1957）。</p>
+<blockquote>
+<p>一方面，<em>bank</em> 會與 <em>money</em>〔金錢〕、<em>notes</em>〔鈔票〕、<em>loan</em>〔貸款〕、<em>account</em>〔帳戶〕、<em>investment</em>〔投資〕、<em>clerk</em>〔行員〕、<em>official</em>〔主管〕、<em>manager</em>〔經理〕、<em>robbery</em>〔搶劫〕、<em>vaults</em>〔金庫〕、<em>working in a</em>〔在一家……工作〕、<em>its actions</em>〔其行動〕、<em>First National</em>〔第一國民……〕、<em>of England</em>〔英格蘭的……〕等詞語或表達方式共現。另一方面，我們也發現 <em>bank</em> 會與 <em>river</em>〔河流〕、<em>swim</em>〔游泳〕、<em>boat</em>〔船〕、<em>east</em>〔東〕（當然還有已各自取得特殊意義的 <em>West</em> 與 <em>South</em>）、<em>on top of the</em>〔在……上方〕以及 <em>of the Rhine</em>〔萊茵河的……〕共現。（Hanks，1987，第 127 頁）</p>
+</blockquote>
+<p>尋找愈來愈細緻的詞語類別並不是新事。以詞典編纂為例，至少可以追溯至 Hornby 的《高階學習者詞典》（<em>Advanced Learner's Dictionary</em>，初版於 1948 年）所描述的「動詞句型」。新出現的條件是，近年來，利用電腦儲存與分析大量自然語言資料的能力已有顯著進展。因此，我們正逐漸能以更嚴謹的方式檢驗並運用這類非形式化的論斷，看看我們的詞語實際上都與哪些詞相伴出現。</p>
+</section><section aria-labelledby="section-2"><h2 id="section-2" tabindex="-1"><span class="section-number">2</span>實務應用</h2>
+<p>本文提出的統計描述有許多可能相當重要的應用，包括：</p>
+<ol>
+<li>為語音辨識與光學字元辨識（OCR）的語言模型提供限制條件。</li>
+<li>在剖析名詞複合詞、並列結構、介系詞片語等高度歧義的句法結構時，提供消歧線索。</li>
+<li>從大型資料庫（例如報紙、專利）中檢索文本。</li>
+<li>提高計算語言學家編製詞彙句法知識詞庫的效率。</li>
+<li>提高詞典編纂者辨識一般用法與慣常用法的效率。</li>
+</ol>
+<p>以光學字元辨識的應用為例。假設我們有一套如 Kahan 等人（1987）所述的 OCR 系統，它認為辨識結果是 <em>farm</em> 或 <em>form</em> 的機率大致相同，而上下文是以下兩者之一：（1）<code>federal ___ credit</code>；（2）<code>some ___ of</code>。</p>
+<ul>
+<li><code>federal {farm / form} credit</code></li>
+<li><code>some {farm / form} of</code></li>
+</ul>
+<p>我們提出的關聯量度可以利用這項事實來消除歧義：第一種上下文中，<em>farm</em> 出現的可能性高得多；第二種上下文中，則是 <em>form</em> 出現的可能性高得多。請注意，其他依賴詞性等句法限制的消歧方法，在這個例子裡不太可能有所幫助，因為 <em>form</em> 與 <em>farm</em> 都經常用作名詞。</p>
+</section><section aria-labelledby="section-3"><h2 id="section-3" tabindex="-1"><span class="section-number">3</span>詞語聯想與心理語言學</h2>
+<p>眾所周知，詞語聯想常模是心理語言學研究的重要因素，尤其是在詞彙提取方面。一般而言，當 <em>nurse</em> 出現在 <em>doctor</em> 這類高度相關的詞之後，受試者對它的反應會比平常快。</p>
+<blockquote>
+<p>以下概述一些反應時間實驗的結果及其意涵。在這些實驗中，受試者或者（a）將依序呈現的字母串分類為詞與非詞，或者（b）把這些字母串念出來。對詞語（例如 BUTTER〔奶油〕）而言，這兩類反應在前面出現相關詞（例如 BREAD〔麵包〕）時，都一致快於前面出現無關詞（例如 NURSE〔護士〕）的情況。（Meyer 等人，1975，第 98 頁）</p>
+</blockquote>
+<p>這類心理語言學研究，大多以詞語聯想常模的實證估計為基礎，例如 Palermo 與 Jenkins（1964）的研究。這可能是同類研究中最具影響力的一項，儘管其涵蓋範圍非常小，而且年代也有些久遠。該研究測量了 200 個詞，方法是請數千名受試者，在每個待測詞之後各寫下一個詞。結果以表格呈現，列出受試者寫下了哪些詞、各有多少人寫下，並依年級與性別分組。例如，該書第 98–100 頁指出，與 <em>doctor</em> 最常聯想到的詞是 <em>nurse</em>，其次是 <em>sick</em>〔生病〕、<em>health</em>〔健康〕、<em>medicine</em>〔醫藥〕、<em>hospital</em>〔醫院〕、<em>man</em>〔男人〕、<em>sickness</em>〔疾病〕、<em>lawyer</em>〔律師〕，以及另外約 70 個詞。</p>
+</section><section aria-labelledby="section-4"><h2 id="section-4" tabindex="-1"><span class="section-number">4</span>以資訊理論為基礎的量度</h2>
+<p>我們以資訊理論的「互資訊」（mutual information）概念為基礎，提出另一種測量詞語聯想常模的量度：關聯比。<sup class="footnote-ref"><a aria-label="閱讀原文註釋 1" href="#fn1" id="fnref1" role="doc-noteref">[1]</a></sup> 相較於 Palermo 與 Jenkins（1964）採用的主觀方法，這項量度更加客觀，成本也更低。關聯比可以擴大應用，為語言中的大量詞彙提供穩健的詞語聯想常模估計。以關聯比衡量，與 <em>doctors</em> 關聯最強的前五個詞依序是：<em>dentists</em>〔牙醫師〕、<em>nurses</em>〔護士〕、<em>treating</em>〔治療中〕、<em>treat</em>〔治療〕與 <em>hospitals</em>〔醫院〕。</p>
+<p>什麼是「互資訊」？根據 Fano（1961），若兩個點（詞）<span class="math inline">x</span> 與 <span class="math inline">y</span> 的機率分別為 <span class="math inline">P(x)</span> 與 <span class="math inline">P(y)</span>，則它們的互資訊 <span class="math inline">I(x,y)</span> 定義為：</p>
+<div class="math block">
+I(x,y)=\log_2\frac{P(x,y)}{P(x)P(y)}
+</div>
+<p>概略來說，互資訊比較的是同時觀察到 <span class="math inline">x</span> 與 <span class="math inline">y</span> 的機率（聯合機率），與分別獨立觀察到 <span class="math inline">x</span> 及 <span class="math inline">y</span> 時的機率乘積（偶然共現的基準）。若 <span class="math inline">x</span> 與 <span class="math inline">y</span> 確實有關聯，聯合機率 <span class="math inline">P(x,y)</span> 就會遠大於偶然共現機率 <span class="math inline">P(x)P(y)</span>，因此 <span class="math inline">I(x,y)\gg 0</span>。若 <span class="math inline">x</span> 與 <span class="math inline">y</span> 之間沒有值得關注的關係，則 <span class="math inline">P(x,y)\approx P(x)P(y)</span>，所以 <span class="math inline">I(x,y)\approx 0</span>。若 <span class="math inline">x</span> 與 <span class="math inline">y</span> 呈互補分布，<span class="math inline">P(x,y)</span> 就會遠小於 <span class="math inline">P(x)P(y)</span>，使得 <span class="math inline">I(x,y)\ll 0</span>。</p>
+<p>在我們的應用中，詞機率 <span class="math inline">P(x)</span> 與 <span class="math inline">P(y)</span> 的估計方式，是計算語料庫中觀察到 <span class="math inline">x</span> 與 <span class="math inline">y</span> 的次數，即 <span class="math inline">f(x)</span> 與 <span class="math inline">f(y)</span>，再除以語料庫大小 <span class="math inline">N</span> 進行正規化。（我們的例子使用了數個大小不同的語料庫：1987 年美聯社〔AP〕語料庫有 1,500 萬詞，1988 年 AP 語料庫有 3,600 萬詞，經標記的語料庫則有 860 萬個詞次〔tokens〕。）聯合機率 <span class="math inline">P(x,y)</span> 的估計方式，是計算在含有 <span class="math inline">w</span> 個詞的視窗中，<span class="math inline">y</span> 出現在 <span class="math inline">x</span> 之後的次數 <span class="math inline">f_w(x,y)</span>，再除以 <span class="math inline">N</span> 進行正規化。</p>
+<blockquote class="translator-note" role="note">
+<p>譯註：此處的 1988 年 AP 語料庫大小，原文寫為 3,600 萬詞；後文與部分表格則使用 4,400 萬詞，另有精確值 44,344,077。本文依各處原文保留。</p>
+</blockquote>
+<p>視窗大小這個參數，讓我們能從不同尺度觀察。較小的視窗可以辨識固定表達方式（如 <em>bread and butter</em> 這類慣用語）及其他作用於短距離的關係；較大的視窗則能凸顯語意概念，以及其他作用於較大範圍的關係。</p>
+<p>表 1 有助於呈現這個差異。<sup class="footnote-ref"><a aria-label="閱讀原文註釋 2" href="#fn2" id="fnref2" role="doc-noteref">[2]</a></sup> 在 <em>bread and butter</em>、<em>drink and drive</em> 等固定表達方式中，所關注的兩個詞之間距離固定，變異數很小。在 1988 年 AP 語料庫中，只要這些詞彼此接近（在五個詞的範圍內），它們的位置差就恰好都是兩個詞。也就是說，平均距離為 2，變異數為 0。</p>
+<p>複合詞的詞序也非常固定（變異數很小），但平均距離較接近一個詞，而不是兩個詞。相較之下，<em>man/woman</em> 這類關係比較不固定，這可由較大的距離變異數看出。（<em>man/women</em> 的平均距離接近 0，表示兩種先後順序出現的次數大致相等。）詞彙關係則有數種類型：有些像 <em>refraining from</em>，相當固定；有些像 <em>coming from</em>，中間可能隔著一個論元；還有些像 <em>keeping from</em>，中間幾乎一定隔著一個論元。</p>
+<p class="table-caption" id="table-1"><strong>表 1　<span class="math inline">x</span> 與 <span class="math inline">y</span> 之間距離的平均值與變異數</strong></p>
+<div aria-labelledby="table-1" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="table-1" class="numeric-table">
+<thead>
+<tr>
+<th scope="col">關係</th>
+<th scope="col">詞 <span class="math inline">x</span></th>
+<th scope="col">詞 <span class="math inline">y</span></th>
+<th scope="col" style="text-align:right">平均距離</th>
+<th scope="col" style="text-align:right">距離變異數</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定表達</td>
+<td>break</td>
+<td>butter</td>
+<td style="text-align:right">2.00</td>
+<td style="text-align:right">0.00</td>
+</tr>
+<tr>
+<td>固定表達</td>
+<td>drink</td>
+<td>drive</td>
+<td style="text-align:right">2.00</td>
+<td style="text-align:right">0.00</td>
+</tr>
+<tr>
+<td>複合詞</td>
+<td>computer</td>
+<td>scientist</td>
+<td style="text-align:right">1.12</td>
+<td style="text-align:right">0.10</td>
+</tr>
+<tr>
+<td>複合詞</td>
+<td>United</td>
+<td>States</td>
+<td style="text-align:right">0.98</td>
+<td style="text-align:right">0.14</td>
+</tr>
+<tr>
+<td>語意關係</td>
+<td>man</td>
+<td>woman</td>
+<td style="text-align:right">1.46</td>
+<td style="text-align:right">8.07</td>
+</tr>
+<tr>
+<td>語意關係</td>
+<td>man</td>
+<td>women</td>
+<td style="text-align:right">-0.12</td>
+<td style="text-align:right">13.08</td>
+</tr>
+<tr>
+<td>詞彙關係</td>
+<td>refraining</td>
+<td>from</td>
+<td style="text-align:right">1.11</td>
+<td style="text-align:right">0.20</td>
+</tr>
+<tr>
+<td>詞彙關係</td>
+<td>coming</td>
+<td>from</td>
+<td style="text-align:right">0.83</td>
+<td style="text-align:right">2.89</td>
+</tr>
+<tr>
+<td>詞彙關係</td>
+<td>keeping</td>
+<td>from</td>
+<td style="text-align:right">2.14</td>
+<td style="text-align:right">5.53</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="translator-note" role="note">
+<p>譯註：表 1 第一列原稿印作 <code>break</code>，正文則以 <code>bread and butter</code> 為例；此處保留表中的原字。</p>
+</blockquote>
+<p>每種情況的理想視窗大小各不相同。本文其餘部分採取折衷作法，將視窗大小 <span class="math inline">w</span> 設為五個詞；這個範圍夠大，足以呈現動詞與論元之間的某些限制，又不致大到掩蓋那些依賴嚴格相鄰關係的限制。<sup class="footnote-ref"><a aria-label="閱讀原文註釋 3" href="#fn3" id="fnref3" role="doc-noteref">[3]</a></sup></p>
+<p>由於次數很少時，關聯比會變得不穩定，因此我們不討論 <span class="math inline">f(x,y)\leq 5</span> 的詞對。可行的改進方式是使用 <span class="math inline">t</span> 分數，剔除未達顯著水準的詞對。可惜，這需要估計 <span class="math inline">f(x,y)</span> 的變異數，超出本文的範圍。因此，本文其餘部分採用這個簡單但任意設定的門檻，忽略出現次數很少的詞對。</p>
+<p>嚴格來說，關聯比與互資訊有兩點差異。第一，聯合機率理應具有對稱性：<span class="math inline">P(x,y)=P(y,x)</span>，因此互資訊也具有對稱性：<span class="math inline">I(x,y)=I(y,x)</span>。然而，關聯比並不對稱，因為 <span class="math inline">f(x,y)</span> 記錄了線性先後順序。（請記得，<span class="math inline">f(x,y)</span> 表示在含有 <span class="math inline">w</span> 個詞的視窗中，詞 <span class="math inline">x</span> 出現在 <span class="math inline">y</span> 之前的次數，而不是兩個詞以任意順序出現的次數。）雖然我們可以重新定義 <span class="math inline">f(x,y)</span>，使其具有對稱性（將矩陣與其轉置矩陣取平均），但我們決定不這麼做，因為順序資訊似乎相當值得研究。請留意表 2 各詞對的不對稱性。這些數值是從 1988 年 AP 文本的 4,400 萬詞計算而得，呈現了從性別偏見到句法等各式各樣的偏向。</p>
+<p class="table-caption" id="table-2"><strong>表 2　1988 年 AP 語料庫中的不對稱性（<span class="math inline">N=4,400</span> 萬）</strong></p>
+<div aria-labelledby="table-2" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="table-2" class="numeric-table">
+<thead>
+<tr>
+<th scope="col"><span class="math inline">x</span></th>
+<th scope="col"><span class="math inline">y</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x,y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(y,x)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>doctors</td>
+<td>nurses</td>
+<td style="text-align:right">99</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td>man</td>
+<td>woman</td>
+<td style="text-align:right">256</td>
+<td style="text-align:right">56</td>
+</tr>
+<tr>
+<td>doctors</td>
+<td>lawyers</td>
+<td style="text-align:right">29</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td>bread</td>
+<td>butter</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>save</td>
+<td>life</td>
+<td style="text-align:right">129</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td>save</td>
+<td>money</td>
+<td style="text-align:right">187</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td>save</td>
+<td>from</td>
+<td style="text-align:right">176</td>
+<td style="text-align:right">18</td>
+</tr>
+<tr>
+<td>supposed</td>
+<td>to</td>
+<td style="text-align:right">1188</td>
+<td style="text-align:right">25</td>
+</tr>
+</tbody>
+</table></div>
+<p>第二，一般可能預期 <span class="math inline">f(x,y)\leq f(x)</span> 且 <span class="math inline">f(x,y)\leq f(y)</span>，但以我們目前的計數方式，如果 <span class="math inline">x</span> 與 <span class="math inline">y</span> 恰巧在視窗中出現多次，就不一定如此。例如，1988 年 4 月 1 日的一則 AP 報導出現以下句子：</p>
+<blockquote>
+<p>Library workers were prohibited from saving books from this heap of ruins.<br/>
+圖書館工作人員被禁止從這堆廢墟中搶救書籍。</p>
+</blockquote>
+<p>在這裡，<span class="math inline">f(\mathrm{prohibited})=1</span>，而 <span class="math inline">f(\mathrm{prohibited},\mathrm{from})=2</span>。將 <span class="math inline">f(x,y)</span> 除以 <span class="math inline">w-1</span> 即可修正這個問題（相當於從我們的關聯比分數中減去 <span class="math inline">\log_2(w-1)=2</span>）。這項調整還有另一個好處，就是確保：</p>
+<div class="math block">
+\sum f(x,y)=\sum f(x)=\sum f(y)=N
+</div>
+<p>當 <span class="math inline">I(x,y)</span> 很大時，關聯比會產生相當可信的結果，與 Palermo 和 Jenkins（1964）所報告的結果頗為相似，如表 3 所示。相對地，當 <span class="math inline">I(x,y)\approx 0</span> 時，這些詞對就比較不值得關注。（我們觀察到一項很粗略的經驗法則：<span class="math inline">I(x,y)&gt;3</span> 的詞對通常值得關注，而 <span class="math inline">I(x,y)</span> 較小的詞對通常不是如此。可以用主觀量度校準這項量度，使這個說法更精確。另一個方法是估計變異數，進而對信賴水準作出陳述，例如：以 95% 的信心水準認為 <span class="math inline">P(x,y)&gt;P(x)P(y)</span>。）</p>
+<p class="table-caption" id="table-3"><strong>表 3　1987 年 AP 語料庫中與「doctor」相關的一些值得關注的關聯（<span class="math inline">N=1,500</span> 萬）</strong></p>
+<div aria-labelledby="table-3" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="table-3" class="numeric-table">
+<thead>
+<tr>
+<th scope="col" style="text-align:right"><span class="math inline">I(x,y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x,y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x)</span></th>
+<th scope="col"><span class="math inline">x</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(y)</span></th>
+<th scope="col"><span class="math inline">y</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">11.3</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">111</td>
+<td>honorary</td>
+<td style="text-align:right">621</td>
+<td>doctor</td>
+</tr>
+<tr>
+<td style="text-align:right">11.3</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">1105</td>
+<td>doctors</td>
+<td style="text-align:right">44</td>
+<td>dentists</td>
+</tr>
+<tr>
+<td style="text-align:right">10.7</td>
+<td style="text-align:right">30</td>
+<td style="text-align:right">1105</td>
+<td>doctors</td>
+<td style="text-align:right">241</td>
+<td>nurses</td>
+</tr>
+<tr>
+<td style="text-align:right">9.4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">1105</td>
+<td>doctors</td>
+<td style="text-align:right">154</td>
+<td>treating</td>
+</tr>
+<tr>
+<td style="text-align:right">9.0</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">275</td>
+<td>examined</td>
+<td style="text-align:right">621</td>
+<td>doctor</td>
+</tr>
+<tr>
+<td style="text-align:right">8.9</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">1105</td>
+<td>doctors</td>
+<td style="text-align:right">317</td>
+<td>treat</td>
+</tr>
+<tr>
+<td style="text-align:right">8.7</td>
+<td style="text-align:right">25</td>
+<td style="text-align:right">621</td>
+<td>doctor</td>
+<td style="text-align:right">1407</td>
+<td>bills</td>
+</tr>
+<tr>
+<td style="text-align:right">8.7</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">621</td>
+<td>doctor</td>
+<td style="text-align:right">350</td>
+<td>visits</td>
+</tr>
+<tr>
+<td style="text-align:right">8.6</td>
+<td style="text-align:right">19</td>
+<td style="text-align:right">1105</td>
+<td>doctors</td>
+<td style="text-align:right">676</td>
+<td>hospitals</td>
+</tr>
+<tr>
+<td style="text-align:right">8.4</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">241</td>
+<td>nurses</td>
+<td style="text-align:right">1105</td>
+<td>doctors</td>
+</tr>
+</tbody>
+</table></div>
+<p class="table-caption" id="table-3-continued"><strong>與「doctor」相關的一些較不值得關注的關聯（表 3 續）</strong></p>
+<div aria-labelledby="table-3-continued" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="table-3-continued" class="numeric-table">
+<thead>
+<tr>
+<th scope="col" style="text-align:right"><span class="math inline">I(x,y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x,y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x)</span></th>
+<th scope="col"><span class="math inline">x</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(y)</span></th>
+<th scope="col"><span class="math inline">y</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0.96</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">621</td>
+<td>doctor</td>
+<td style="text-align:right">73785</td>
+<td>with</td>
+</tr>
+<tr>
+<td style="text-align:right">0.95</td>
+<td style="text-align:right">41</td>
+<td style="text-align:right">284690</td>
+<td>a</td>
+<td style="text-align:right">1105</td>
+<td>doctors</td>
+</tr>
+<tr>
+<td style="text-align:right">0.93</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">84716</td>
+<td>is</td>
+<td style="text-align:right">1105</td>
+<td>doctors</td>
+</tr>
+</tbody>
+</table></div>
+<p>若 <span class="math inline">I(x,y)\ll 0</span>，我們會預測 <span class="math inline">x</span> 與 <span class="math inline">y</span> 呈互補分布。然而，我們很少能觀察到 <span class="math inline">I(x,y)\ll 0</span>，因為語料庫太小，而且測量方法也太粗略。例如，假設 <span class="math inline">x</span> 與 <span class="math inline">y</span> 在每百萬詞的文本中都約出現 10 次，則 <span class="math inline">P(x)=P(y)=10^{-5}</span>，而偶然共現機率為 <span class="math inline">P(x)P(x)=10^{-10}</span>。因此，要說 <span class="math inline">I(x,y)</span> 遠小於 0，就必須能說 <span class="math inline">P(x,y)</span> 遠小於 <span class="math inline">10^{-10}</span>；以目前可取得的語料庫大小，很難對這種陳述有充分信心。事實上，我們無法輕易觀察到小於 <span class="math inline">1/N\approx 10^{-7}</span> 的機率，因此，除非偶然共現機率本身很大，否則很難判定 <span class="math inline">I(x,y)</span> 是否表示遠低於偶然共現基準的情況。（事實上，表 3 中的詞對 <em>a … doctors</em>，出現頻率顯著低於偶然共現的預期值。但要支持這項陳述，我們必須補償視窗大小的影響，將分數向下調整 2.0，例如從 0.96 降為 −1.04；同時，還需要用 Good〔1953〕之類的方法估計標準差。）<sup class="footnote-ref"><a aria-label="閱讀原文註釋 4" href="#fn4" id="fnref4" role="doc-noteref">[4]</a></sup></p>
+<blockquote class="translator-note" role="note">
+<p>譯註：上段的 <span class="math inline">P(x)P(x)</span> 為原文寫法；因已假設 <span class="math inline">P(x)=P(y)</span>，此例的計算結果不受影響。另，正文以 0.96 說明分數調整，但表 3 中 <code>a … doctors</code> 的分數列為 0.95；兩處均依原文保留。</p>
+</blockquote>
+</section><section aria-labelledby="section-5"><h2 id="section-5" tabindex="-1"><span class="section-number">5</span>詞彙句法規律</h2>
+<p>雖然心理語言學文獻已相當詳細地記錄 <em>doctor/nurse</em> 等名詞／名詞聯想的重要性，對於動詞、功能詞、形容詞與其他非名詞之間的關聯，卻相對少有討論。除了辨識 <em>doctor/nurse</em> 這類語意關係，我們也認為，關聯比可以用來尋找動詞與其典型論元或附加語之間值得關注的詞彙句法關係。我們提出的關聯比，可以視為 Sinclair 以下論述的形式化版本：</p>
+<blockquote>
+<p>含有 <em>set</em> 的片語動詞有多常見？<em>Set</em> 特別容易與 <em>about</em>、<em>in</em>、<em>up</em>、<em>out</em>、<em>on</em>、<em>off</em> 等詞結合，而這些詞本身也非常常見。<em>Set off</em> 出現的可能性有多高？兩者都是高頻詞［每百萬詞中，<em>set</em> 約出現 250 次，<em>off</em> 約出現 556 次……］。我們提出的問題，大致可以改寫為：<em>off</em> 緊接在 <em>set</em> 之後出現的可能性有多高？……這是 <span class="math inline">0.00025\times 0.00055</span>［<span class="math inline">P(x)P(y)</span>］，得到一個很小的數字：0.0000001375……這項計算背後的假設，是詞語隨機分布於文本中［用我們的術語來說，就是偶然共現］。語言學家顯然知道情況並非如此；要粗略衡量 <em>set</em> 與 <em>off</em> 彼此吸引的程度，可以把這個機率與實際發生的情形比較……在 730 萬詞的語料庫裡，<em>set off</em> 出現了近 70 次［<span class="math inline">P(x,y)=70/(7.3\times 10^6)\gg P(x)P(y)</span>］。這已足以顯示其主要模式，也意味著，在現有語料庫中，應能找到足夠的證據來描述相當多的片語……（Sinclair，1987c，第 151–152 頁）</p>
+</blockquote>
+<p>使用 Sinclair 的估計值 <span class="math inline">P(\mathrm{set})\approx 250\times 10^{-6}</span>、<span class="math inline">P(\mathrm{off})\approx 556\times 10^{-6}</span>，以及 <span class="math inline">P(\mathrm{set},\mathrm{off})\approx 70/(7.3\times 10^6)</span>，我們可以估計互資訊為：</p>
+<div class="math block">
+I(\mathrm{set};\mathrm{off})
+=\log_2\frac{P(\mathrm{set},\mathrm{off})}{P(\mathrm{set})P(\mathrm{off})}
+\approx 6.1
+</div>
+<p>在 1988 年 AP 語料庫中，<span class="math inline">N=44,344,077</span>；我們估計 <span class="math inline">P(\mathrm{set})\approx 13,046/N</span>、<span class="math inline">P(\mathrm{off})\approx 20,693/N</span>，以及 <span class="math inline">P(\mathrm{set},\mathrm{off})\approx 463/N</span>。利用這些估計值，算出的互資訊為 <span class="math inline">I(\mathrm{set};\mathrm{off})\approx 6.2</span>。</p>
+<p>至少在這個例子裡，不同語料庫得到的數值似乎相當接近。在其他例子中，我們會看到取樣造成的差異。Sinclair 的語料庫是一個相當平衡的文本樣本，主要來自英式英語；AP 語料庫則是美式新聞文體的不平衡樣本。</p>
+<p><em>Set</em> 與 <em>off</em> 之間的這種關聯相當強；其聯合機率超過偶然共現機率的 <span class="math inline">2^6=64</span> 倍。Sinclair 提到的其他小品詞，其關聯比如表 4 所示。</p>
+<p class="table-caption" id="table-4"><strong>表 4　1988 年 AP 語料庫中的一些片語動詞（<span class="math inline">N=4,400</span> 萬）</strong></p>
+<div aria-labelledby="table-4" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="table-4" class="numeric-table">
+<thead>
+<tr>
+<th scope="col"><span class="math inline">x</span></th>
+<th scope="col"><span class="math inline">y</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x,y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">I(x;y)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set</td>
+<td>up</td>
+<td style="text-align:right">13,046</td>
+<td style="text-align:right">64,601</td>
+<td style="text-align:right">2713</td>
+<td style="text-align:right">7.3</td>
+</tr>
+<tr>
+<td>set</td>
+<td>off</td>
+<td style="text-align:right">13,046</td>
+<td style="text-align:right">20,693</td>
+<td style="text-align:right">463</td>
+<td style="text-align:right">6.2</td>
+</tr>
+<tr>
+<td>set</td>
+<td>out</td>
+<td style="text-align:right">13,046</td>
+<td style="text-align:right">47,956</td>
+<td style="text-align:right">301</td>
+<td style="text-align:right">4.4</td>
+</tr>
+<tr>
+<td>set</td>
+<td>on</td>
+<td style="text-align:right">13,046</td>
+<td style="text-align:right">258,170</td>
+<td style="text-align:right">162</td>
+<td style="text-align:right">1.1</td>
+</tr>
+<tr>
+<td>set</td>
+<td>in</td>
+<td style="text-align:right">13,046</td>
+<td style="text-align:right">739,932</td>
+<td style="text-align:right">795</td>
+<td style="text-align:right">1.8</td>
+</tr>
+<tr>
+<td>set</td>
+<td>about</td>
+<td style="text-align:right">13,046</td>
+<td style="text-align:right">82,319</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right">-0.6</td>
+</tr>
+</tbody>
+</table></div>
+<p>前三個，也就是 <em>set up</em>、<em>set off</em> 與 <em>set out</em>，具有明確關聯；後三個則比較不明確。正如 Sinclair 所指出，至少在某些情況下，這種方法很適合辨識片語動詞。</p>
+</section><section aria-labelledby="section-6"><h2 id="section-6" tabindex="-1"><span class="section-number">6</span>以詞性標記器進行前處理</h2>
+<p>含有介系詞 <em>to</em> 的片語動詞帶來一個值得研究的問題，因為它可能與不定詞標記 <em>to</em> 混淆。我們發現，若先使用 Church（1988）之類的方法，替語料庫中的每個詞標記詞性，再測量帶有標記的詞之間的關聯，就能辨識兩類動詞之間值得關注的對比：一類與後接的介系詞 <code>to/in</code> 相關，另一類則與後接的不定詞標記 <code>to/to</code> 相關。（詞性記號取自 Francis 與 Kučera〔1982〕：<code>in</code>＝介系詞；<code>to</code>＝不定詞標記；<code>vb</code>＝原形動詞；<code>vbg</code>＝動詞加 <code>-ing</code>；<code>vbd</code>＝動詞加 <code>-ed</code>；<code>vbz</code>＝動詞加 <code>-s</code>；<code>vbn</code>＝動詞加 <code>-en</code>。）關聯比辨識出相當多與 <em>to</em> 具有值得關注之關係的動詞；如果只看分數達 3.0 以上的詞對，與介系詞 <code>to/in</code> 相關的動詞有 768 個，與不定詞標記 <code>to/to</code> 相關的動詞有 551 個。在 <code>to/in</code> 之前，關聯最強的十個動詞如下：</p>
+<ul>
+<li><code>to/in</code>：<code>alluding/vbg</code>、<code>adhere/vb</code>、<code>amounted/vbn</code>、<code>relating/vbg</code>、<code>amounting/vbg</code>、<code>revert/vb</code>、<code>reverted/vbn</code>、<code>resorting/vbg</code>、<code>relegated/vbn</code>。</li>
+<li><code>to/to</code>：<code>obligated/vbn</code>、<code>trying/vbg</code>、<code>compelled/vbn</code>、<code>enables/vbz</code>、<code>supposed/vbn</code>、<code>intends/vbz</code>、<code>vowing/vbg</code>、<code>tried/vbd</code>、<code>enabling/vbg</code>、<code>tends/vbz</code>、<code>tend/vb</code>、<code>intend/vb</code>、<code>tries/vbz</code>。</li>
+</ul>
+<blockquote class="translator-note" role="note">
+<p>譯註：原文稱「十個」，但實際在 <code>to/in</code> 後列出 9 項，在 <code>to/to</code> 後列出 13 項；此處完整保留原列舉。</p>
+</blockquote>
+<p>由此可見，對語料庫進行前處理，並調整所採用的詞項集合，可以帶來相當大的效益。</p>
+</section><section aria-labelledby="section-7"><h2 id="section-7" tabindex="-1"><span class="section-number">7</span>以句法剖析器進行前處理</h2>
+<p>Hindle（Church 等人，1989）發現，先用 Fidditch 句法剖析器（Hindle，1983a、1983b）處理輸入資料，有助於辨識動詞與論元之間的關聯，並以此為基礎推定名詞的語意類別。如表 5、表 6 所示，Hindle 的方法能找出一些相當值得研究的關聯。</p>
+<p>Hindle 用剖析器處理 1988 年 AP 語料庫（4,400 萬詞）後，找到了 <span class="math inline">N=4,112,943</span> 個主詞／動詞／受詞（SVO）三元組。動詞與受詞之間的互資訊，是以這 400 萬個三元組為基礎，計算動詞與受詞出現在同一三元組中的頻率，再與偶然共現的基準相比而得。例如，<code>disconnect/V</code> 與 <code>telephone/O</code> 的聯合機率是 <span class="math inline">7/N</span>。在這個例子中，偶然共現機率是 <span class="math inline">(84/N)\times(481/N)</span>，因為有 84 個 SVO 三元組的動詞為 <em>disconnect</em>，而有 481 個 SVO 三元組的受詞為 <em>telephone</em>。互資訊為：</p>
+<div class="math block">
+\log_2\frac{7N}{84\times 481}=9.48
+</div>
+<p>同樣地，<code>drink/V</code> 與 <code>beer/O</code> 的互資訊為：</p>
+<div class="math block">
+9.9=\log_2\frac{29N}{660\times 195}
+</div>
+<p>（<code>drink/V</code> 與 <code>beer/O</code> 分別出現在 660 個及 195 個 SVO 三元組中，其中有 29 個三元組同時包含兩者。）</p>
+<p class="table-caption" id="table-5"><strong>表 5　你可以喝什麼？</strong></p>
+<div aria-labelledby="table-5" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="table-5" class="numeric-table">
+<thead>
+<tr>
+<th scope="col">動詞</th>
+<th scope="col">受詞</th>
+<th scope="col" style="text-align:right">互資訊</th>
+<th scope="col" style="text-align:right">共現次數</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>martinis/O</code></td>
+<td style="text-align:right">12.6</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>cup_water/O</code></td>
+<td style="text-align:right">11.6</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>champagne/O</code></td>
+<td style="text-align:right">10.9</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>beverage/O</code></td>
+<td style="text-align:right">10.8</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>cup_coffee/O</code></td>
+<td style="text-align:right">10.6</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>cognac/O</code></td>
+<td style="text-align:right">10.6</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>beer/O</code></td>
+<td style="text-align:right">9.9</td>
+<td style="text-align:right">29</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>cup/O</code></td>
+<td style="text-align:right">9.7</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>coffee/O</code></td>
+<td style="text-align:right">9.7</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>toast/O</code></td>
+<td style="text-align:right">9.6</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>alcohol/O</code></td>
+<td style="text-align:right">9.4</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>wine/O</code></td>
+<td style="text-align:right">9.3</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>fluid/O</code></td>
+<td style="text-align:right">9.0</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>liquor/O</code></td>
+<td style="text-align:right">8.9</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>tea/O</code></td>
+<td style="text-align:right">8.9</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>milk/O</code></td>
+<td style="text-align:right">8.7</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>juice/O</code></td>
+<td style="text-align:right">8.3</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>water/O</code></td>
+<td style="text-align:right">7.2</td>
+<td style="text-align:right">43</td>
+</tr>
+<tr>
+<td><code>drink/V</code></td>
+<td><code>quantity/O</code></td>
+<td style="text-align:right">7.1</td>
+<td style="text-align:right">4</td>
+</tr>
+</tbody>
+</table></div>
+<p class="table-caption" id="table-6"><strong>表 6　你可以對電話做什麼？</strong></p>
+<div aria-labelledby="table-6" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="table-6" class="numeric-table">
+<thead>
+<tr>
+<th scope="col">動詞</th>
+<th scope="col">受詞</th>
+<th scope="col" style="text-align:right">互資訊</th>
+<th scope="col" style="text-align:right">共現次數</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sit_by/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">11.78</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td><code>disconnect/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">9.48</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td><code>answer/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">8.80</td>
+<td style="text-align:right">98</td>
+</tr>
+<tr>
+<td><code>hang_up/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">7.87</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>tap/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">7.69</td>
+<td style="text-align:right">15</td>
+</tr>
+<tr>
+<td><code>pick_up/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">5.63</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td><code>return/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">5.01</td>
+<td style="text-align:right">19</td>
+</tr>
+<tr>
+<td><code>be_by/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">4.93</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>spot/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">4.43</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>repeat/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">4.39</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td><code>place/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">4.23</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td><code>receive/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">4.22</td>
+<td style="text-align:right">28</td>
+</tr>
+<tr>
+<td><code>install/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">4.20</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td><code>be_on/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">4.05</td>
+<td style="text-align:right">15</td>
+</tr>
+<tr>
+<td><code>come_to/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">3.63</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td><code>use/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">3.59</td>
+<td style="text-align:right">29</td>
+</tr>
+<tr>
+<td><code>operate/V</code></td>
+<td><code>telephone/O</code></td>
+<td style="text-align:right">3.16</td>
+<td style="text-align:right">4</td>
+</tr>
+</tbody>
+</table></div>
+<p>Hindle 剖析器的這項應用，是透過輸入資料前處理來凸顯特定限制的第二個例子。在測量句法限制時，納入某些詞性資訊、排除名詞片語的大部分內部結構，可能會有幫助。對其他目的而言，替詞項或片語加上 <code>*person*</code>〔人〕、<code>*place*</code>〔地點〕、<code>*time*</code>〔時間〕、<code>*body part*</code>〔身體部位〕、<code>*bad*</code>〔不利事物〕等語意標籤，也可能有所幫助。</p>
+</section><section aria-labelledby="section-8"><h2 id="section-8" tabindex="-1"><span class="section-number">8</span>詞典編纂上的應用</h2>
+<p>大型機器可讀語料庫直到現在才開始能供詞典編纂者使用。此前，詞典編纂者不是仰賴人工閱讀所蒐集的引例，就是使用只有約一百萬詞的小型語料庫。前者帶有選擇性，因此難免造成偏差：罕見詞與罕見用法會被蒐集，常見詞的常見用法卻不會。後者則只能對少數最高頻英語詞彙的最常見用法，提供可靠資訊。（像 Brown Corpus 這種百萬詞語料庫，大致只能對約 4,000 個詞條的部分詞形之部分用法，提供可靠資訊。然而，一般詞典的詞條數通常是這個數量的 20 倍。）</p>
+<p>目前可用來研究機器可讀語料庫的電腦工具，仍然相當初步。這些工具是語料索引程式（concordancing programs，見圖 1），基本上就是 KWIC（key word in context，上下文關鍵詞；Aho 等人，1988）索引，再加上擴大上下文、向左或向右排序等功能。互動式軟體非常少。1980 年代詞典編纂的典型情形是：詞典編纂者拿到某個詞的語料索引，在列印稿上用彩色筆標示，以辨識主要詞義，接著撰寫句法描述與釋義。</p>
+<p>相較於由人工閱讀來蒐集一箱箱引例索引卡，這種技術已有很大進步；一個世紀以前，Murray 編纂《牛津英語詞典》時採用的正是前一種方法。但這種技術只有在一個詞不超過數十條索引行、而且主要詞義只有兩三種時，才運作良好。當分析 <em>take</em>、<em>save</em> 或 <em>from</em> 這類複雜的詞時，詞典編纂者必須從成千上萬條索引行、也就是一頁又一頁的電腦列印稿中，找出隱藏的顯著模式與細微差異。沒有工具輔助的人腦，根本無法發現所有重要模式，更不用說將它們分組並依重要性排序。</p>
+<p class="figure-caption" id="figure-1"><strong>圖 1　1987 年 AP 語料庫中，<code>save</code> 語料索引的一小段樣本</strong></p>
+<div aria-labelledby="figure-1" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="figure-1" class="examples-table">
+<thead>
+<tr>
+<th scope="col">原文索引行</th>
+<th scope="col">中文翻譯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>… Sunday, calling for greater economic reforms to <strong>save</strong> China from poverty.</td>
+<td>…週日呼籲進行更大幅度的經濟改革，使中國擺脫貧窮。</td>
+</tr>
+<tr>
+<td>… asserted that “the Postal Service could <strong>save</strong> enormous sums of money in contracting out individual …</td>
+<td>…斷言：「郵政機關可以藉由將個別……委外，節省龐大金額……」</td>
+</tr>
+<tr>
+<td>Then, she said, the family hopes to <strong>save</strong> enough for a down payment on a home.</td>
+<td>然後，她說，全家希望存夠買房的頭期款。</td>
+</tr>
+<tr>
+<td>… out-of-work steelworker, “because that doesn't <strong>save</strong> jobs, that costs jobs.”</td>
+<td>…失業的鋼鐵工人：「因為那不會保住工作，反而會讓人失去工作。」</td>
+</tr>
+<tr>
+<td>… “We suspend reality when we say we'll <strong>save</strong> money by spending $10,000 in wages for a public works …</td>
+<td>…「當我們說，花一萬美元支付公共工程的薪資就能省錢時，我們是在漠視現實……」</td>
+</tr>
+<tr>
+<td>… scientists has won the first round in an effort to <strong>save</strong> one of Egypt's great treasures, the decaying tomb of …</td>
+<td>…科學家在搶救埃及一項重要寶藏、也就是一座正在毀壞的……陵墓的努力中，贏得了第一回合。</td>
+</tr>
+<tr>
+<td>… about three children in a mining town who plot to <strong>save</strong> the “pit ponies” doomed to be slaughtered.</td>
+<td>…講述礦業小鎮中三個孩子設法拯救註定要遭宰殺的「礦坑小馬」。</td>
+</tr>
+<tr>
+<td>GM executives say the shutdowns will <strong>save</strong> the automaker $500 million a year in operating costs …</td>
+<td>通用汽車主管表示，停工將使這家汽車製造商每年節省五億美元營運成本……</td>
+</tr>
+<tr>
+<td>… as receiver, instructed officials to try to <strong>save</strong> the company rather than liquidate it and then declared …</td>
+<td>…擔任接管人，指示官員設法挽救公司而不是清算，接著宣布……</td>
+</tr>
+<tr>
+<td>The package, which is to <strong>save</strong> the country nearly $2 billion, also includes a program …</td>
+<td>這套方案將為國家節省近二十億美元，其中也包含一項計畫……</td>
+</tr>
+<tr>
+<td>… newly enhanced image as the moderate who moved to <strong>save</strong> the country.</td>
+<td>…採取行動挽救國家的溫和派人士，其形象因而進一步提升。</td>
+</tr>
+<tr>
+<td>… million offer from chairman Victor Posner to help <strong>save</strong> the financially troubled company, but said Posner …</td>
+<td>…董事長 Victor Posner 提出金額以百萬計的方案，以協助挽救這家財務困難的公司，但表示 Posner……</td>
+</tr>
+<tr>
+<td>… after telling a delivery-room doctor not to try to <strong>save</strong> the infant by inserting a tube in its throat to help …</td>
+<td>…在告訴產房醫師，不要試圖把管子插入嬰兒喉嚨以幫助……來搶救嬰兒之後……</td>
+</tr>
+<tr>
+<td>… birthday Tuesday, cheered by those who fought to <strong>save</strong> the majestic Beaux Arts architectural masterpiece.</td>
+<td>…週二生日，曾努力保護這座宏偉法國學院派建築傑作的人們為之歡呼。</td>
+</tr>
+<tr>
+<td>… he had formed an alliance with Moslem rebels to <strong>save</strong> the nation from communism.</td>
+<td>…他曾與穆斯林叛軍結盟，以拯救國家免於共產主義。</td>
+</tr>
+<tr>
+<td>“Basically we could <strong>save</strong> the operating costs of the Pershings and ground-launch …</td>
+<td>「基本上，我們可以省下潘興飛彈與地面發射……的運作成本……」</td>
+</tr>
+<tr>
+<td>We worked for a year to <strong>save</strong> the site at enormous expense to us,” said Leveillee.</td>
+<td>Leveillee 說：「我們努力了一年來保護這個場址，自己付出了龐大代價。」</td>
+</tr>
+<tr>
+<td>… their expensive mirrors, just like in wartime, to <strong>save</strong> them from drunken Yankee brawlers,” Tass said.</td>
+<td>塔斯社表示：「…他們昂貴的鏡子，就像戰時一樣，以免遭醉酒鬧事的美國人破壞。」</td>
+</tr>
+<tr>
+<td>… of many who risked their own lives in order to <strong>save</strong> those who were passengers.”</td>
+<td>…許多人冒著自己的生命危險，以便救出那些乘客。」</td>
+</tr>
+<tr>
+<td>We must increase the amount Americans <strong>save</strong>.”</td>
+<td>「我們必須增加美國人的儲蓄金額。」</td>
+</tr>
+</tbody>
+</table></div>
+<p>1987 年 AP 語料庫中，<em>save</em> 的語料索引長達許多頁；光是原形就有 666 行，而屈折變化形式 <em>saved</em>、<em>saves</em>、<em>saving</em> 與 <em>savings</em> 的索引行更多。為了簡化以下討論，我們不分析這些屈折形式，而且只看 <em>save</em> 右側的模式（見表 7）。</p>
+<p>在這樣的語料索引中，很難判斷哪些現象重要、哪些不重要。例如，從圖 1 選出的索引行很容易看出，<em>to</em> 經常出現在 <em>save</em> 之前，<em>the</em> 經常出現在 <em>save</em> 之後；但只靠檢視語料索引，很難判定這兩種共現現象究竟是一種、兩種都具有意義，還是都沒有。</p>
+<p>以下兩個例子將說明，關聯比量度如何讓分析更快，也更準確。</p>
+<h3 id="section-8-1" tabindex="-1"><span class="section-number">8.1</span>例一：「save … from」</h3>
+<p>表 7 的關聯比顯示，關聯常模不只適用於實詞，也適用於功能詞。例如，與 <em>save</em> 有顯著關聯的詞之一就是 <em>from</em>。許多詞典，例如 Merriam Webster 出版的《韋氏新大學詞典》第九版（<em>Webster's Ninth New Collegiate Dictionary</em>），都沒有在 <em>save</em> 詞條中明確提到 <em>from</em>；英國的學習者詞典則會特別指出 <em>save</em> 與 <em>from</em> 的關係。相較於美國的大學詞典，這些學習者詞典更重視語言結構與搭配，而受英國傳統訓練的詞典編纂者，通常也相當擅長察覺這類概括性規律。然而，釐清這些事實、區分正確與錯誤的直覺，需要大量時間與辛勤工作，而且很容易出現不一致與遺漏。</p>
+<p class="table-caption" id="table-7"><strong>表 7　經常在 <code>save</code> 右側共現的詞</strong></p>
+<div aria-labelledby="table-7" class="table-scroll" role="region" tabindex="0"><table aria-labelledby="table-7" class="numeric-table">
+<thead>
+<tr>
+<th scope="col" style="text-align:right"><span class="math inline">I(x,y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x,y)</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(x)</span></th>
+<th scope="col"><span class="math inline">x</span></th>
+<th scope="col" style="text-align:right"><span class="math inline">f(y)</span></th>
+<th scope="col"><span class="math inline">y</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">9.5</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">170</td>
+<td>forests</td>
+</tr>
+<tr>
+<td style="text-align:right">9.4</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">180</td>
+<td><code>$1.2</code></td>
+</tr>
+<tr>
+<td style="text-align:right">8.8</td>
+<td style="text-align:right">37</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">1697</td>
+<td>lives</td>
+</tr>
+<tr>
+<td style="text-align:right">8.7</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">301</td>
+<td>enormous</td>
+</tr>
+<tr>
+<td style="text-align:right">8.3</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">447</td>
+<td>annually</td>
+</tr>
+<tr>
+<td style="text-align:right">7.7</td>
+<td style="text-align:right">20</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">2001</td>
+<td>jobs</td>
+</tr>
+<tr>
+<td style="text-align:right">7.6</td>
+<td style="text-align:right">64</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">6776</td>
+<td>money</td>
+</tr>
+<tr>
+<td style="text-align:right">7.2</td>
+<td style="text-align:right">36</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">4875</td>
+<td>life</td>
+</tr>
+<tr>
+<td style="text-align:right">6.6</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">1668</td>
+<td>dollars</td>
+</tr>
+<tr>
+<td style="text-align:right">6.4</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">1719</td>
+<td>costs</td>
+</tr>
+<tr>
+<td style="text-align:right">6.4</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">1481</td>
+<td>thousands</td>
+</tr>
+<tr>
+<td style="text-align:right">6.2</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">2590</td>
+<td>face</td>
+</tr>
+<tr>
+<td style="text-align:right">5.7</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">2311</td>
+<td>son</td>
+</tr>
+<tr>
+<td style="text-align:right">5.7</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">2387</td>
+<td>estimated</td>
+</tr>
+<tr>
+<td style="text-align:right">5.5</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">3141</td>
+<td>your</td>
+</tr>
+<tr>
+<td style="text-align:right">5.5</td>
+<td style="text-align:right">24</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">10880</td>
+<td>billion</td>
+</tr>
+<tr>
+<td style="text-align:right">5.3</td>
+<td style="text-align:right">39</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">20846</td>
+<td>million</td>
+</tr>
+<tr>
+<td style="text-align:right">5.2</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">4398</td>
+<td>us</td>
+</tr>
+<tr>
+<td style="text-align:right">5.1</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">3513</td>
+<td>less</td>
+</tr>
+<tr>
+<td style="text-align:right">5.0</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">4590</td>
+<td>own</td>
+</tr>
+<tr>
+<td style="text-align:right">4.6</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">5798</td>
+<td>world</td>
+</tr>
+<tr>
+<td style="text-align:right">4.6</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">6028</td>
+<td>my</td>
+</tr>
+<tr>
+<td style="text-align:right">4.6</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">13010</td>
+<td>them</td>
+</tr>
+<tr>
+<td style="text-align:right">4.5</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">7434</td>
+<td>country</td>
+</tr>
+<tr>
+<td style="text-align:right">4.4</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">14296</td>
+<td>time</td>
+</tr>
+<tr>
+<td style="text-align:right">4.4</td>
+<td style="text-align:right">64</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">61262</td>
+<td>from</td>
+</tr>
+<tr>
+<td style="text-align:right">4.3</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">23258</td>
+<td>more</td>
+</tr>
+<tr>
+<td style="text-align:right">4.2</td>
+<td style="text-align:right">25</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">27367</td>
+<td>their</td>
+</tr>
+<tr>
+<td style="text-align:right">4.1</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">9249</td>
+<td>company</td>
+</tr>
+<tr>
+<td style="text-align:right">4.1</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">724</td>
+<td>save</td>
+<td style="text-align:right">7114</td>
+<td>month</td>
+</tr>
+</tbody>
+</table></div>
+<p>還有哪些動詞通常與 <em>from</em> 相關？<em>Save</em> 在這樣的清單裡排第幾？關聯比辨識出 1,530 個與 <em>from</em> 相關的詞，其中 911 個被標記為動詞。前 100 個動詞如下：</p>
+<pre><code class="language-text">refrain/vb, gleaned/vbn, stems/vbz, stemmed/vbd,
+stemming/vbg, ranging/vbg, stemmed/vbn, ranged/vbn,
+derived/vbn, ranged/vbd, extort/vb, graduated/vbd,
+barred/vbn, benefiting/vbg, benefitted/vbn, benefited/vbn,
+excused/vbd, arising/vbg, range/vb, exempts/vbz,
+suffers/vbz, exempting/vbg, benefited/vbd, prevented/vbd (7.0),
+seeping/vbg, barred/vbd, prevents/vbz, suffering/vbg,
+excluded/vbn, marks/vbz, profiting/vbg, recovering/vbg,
+discharged/vbn, rebounding/vbg, vary/vb, exempted/vbn,
+separate/vb, banished/vbn, withdrawing/vbg, ferry/vb,
+prevented/vbn, profit/vb, bar/vb, excused/vbn,
+bars/vbz, benefit/vb, emerges/vbz, emerge/vb,
+varies/vbz, differ/vb, removed/vbn, exempt/vb,
+expelled/vbn, withdraw/vb, stem/vb, separated/vbn,
+judging/vbg, adapted/vbn, escaping/vbg, inherited/vbn,
+differed/vbd, emerged/vbd, withheld/vbd, leaked/vbn,
+strip/vb, resulting/vbg, discourage/vb, prevent/vb,
+withdrew/vbd, prohibits/vbz, borrowing/vbg, preventing/vbg,
+prohibit/vb, resulted/vbd (6.0), preclude/vb, divert/vb,
+distinguish/vb, pulled/vbn, fell/vbn, varied/vbn,
+emerging/vbg, suffer/vb, prohibiting/vbg, extract/vb,
+subtract/vb, recover/vb, paralyzed/vbn, stole/vbd,
+departing/vbg, escaped/vbn, prohibited/vbn, forbid/vb,
+evacuated/vbn, reap/vb, barring/vbg, removing/vbg,
+stolen/vbn, receives/vbz.
+</code></pre>
+<blockquote class="translator-note" role="note">
+<p>譯註：原文稱「前 100 個動詞」，但實際列出 98 項；此處逐項保留。</p>
+</blockquote>
+<p><em>Save … from</em> 是說明關聯比優點的好例子。<em>Save</em> 在這份清單中排第 319，表示這項關聯的強度適中：強到足以具有重要性（其出現可能性是偶然共現基準的 21 倍），卻又沒有強到會在語料索引中一眼可見，或成為我們最先想到的用法之一。</p>
+<p>如果詞典要列出 <em>save … from</em>，那麼為求一致，也應考慮列出所有更重要的關聯。上述清單中有 27 個原形動詞（標記為 <code>vb</code>），除了七個之外，《Collins Cobuild 英語詞典》（<em>Collins Cobuild English Language Dictionary</em>）都記載了它們與 <em>from</em> 搭配的用法。然而，這部詞典並未指出 <em>vary</em>、<em>ferry</em>、<em>strip</em>、<em>divert</em>、<em>forbid</em> 與 <em>reap</em> 會與 <em>from</em> 一起出現。如果 Cobuild 的詞典編纂者當時能使用我們提出的量度，可能就能以較低成本達到更完整的涵蓋範圍。</p>
+<blockquote class="translator-note" role="note">
+<p>譯註：原文稱「除了七個之外」，但接著只列出六個未記載的動詞；此處依原文保留。</p>
+</blockquote>
+<h3 id="section-8-2" tabindex="-1"><span class="section-number">8.2</span>例二：辨識語意類別</h3>
+<p>確立 <em>save … from</em> 的相對重要性，並注意到這兩個詞很少相鄰之後，我們現在希望加快這項耗費大量人力的工作：將語料索引行分類。理想上，我們希望開發一組半自動工具，協助詞典編纂者產出類似圖 2 的結果；圖 2 對 <em>save … from</em> 的 65 條索引行提供了附帶標註的摘要。<sup class="footnote-ref"><a aria-label="閱讀原文註釋 5" href="#fn5" id="fnref5" role="doc-noteref">[5]</a></sup> 在 <em>save</em> 的 666 條索引行中，約有 10% 出現 <em>save … from</em> 這個模式。</p>
+<p>傳統上，人們對語意類別只有模糊的認識；至今，投入大型語料庫系統性分類的心力仍然很少。詞典編纂者往往憑印象使用語料索引；語意理論家、人工智慧研究者及其他人，則專注於少數有趣的例子，例如 <em>bachelor</em>〔單身漢〕，很少思考如何把這些結果擴展到更大的規模。</p>
+<p>基於這個考量，一個合理的問題是：這 65 條 <em>save … from</em> 索引行，與 <em>save</em> 的所有其他用法究竟有多契合？為回答這個問題，我們進行了繁重的語料索引分析。接近完成時，我們發現，為了掌握概括性規律而設計的標籤，多半只要看看 <em>save</em> 的關聯比表中列出的詞項，就能得到提示。例如，在分析 <em>save</em> 時，我們未能注意到時間副詞語的重要性，而且也沒有詞典記載這一點。然而，從上面的關聯比表應該可以清楚看出，<em>annually</em>〔每年〕與 <em>month</em>〔月〕<sup class="footnote-ref"><a aria-label="閱讀原文註釋 6" href="#fn6" id="fnref6" role="doc-noteref">[6]</a></sup> 經常和 <em>save</em> 一起出現。更仔細的檢視顯示，時間副詞語只與 <em>save</em> 的某一組受詞具有值得關注的關係，也就是那些被標記為 <code>[MONEY]</code> 的受詞。AP 通訊稿中充滿了 <em>saving $1.2 billion per month</em>〔每月節省十二億美元〕之類的討論；如果這類模式具有普遍性，計算詞典編纂就應予以測量並記錄，即使傳統詞典沒有這麼做。</p>
+<p>另一個例子也能說明，關聯比表原本可以如何幫助我們分析 <em>save</em> 的索引行。我們曾考慮用 <code>ENV(IRONMENT)</code>〔環境〕這個語意標籤，分析以下例句：</p>
+<div aria-label="語料例句對照" class="table-scroll" role="region" tabindex="0"><table aria-label="語料例句對照" class="examples-table">
+<thead>
+<tr>
+<th scope="col">原文</th>
+<th scope="col">中文翻譯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>the trend to save the forests[ENV]</code></td>
+<td>保護森林 <code>[ENV]</code> 的趨勢</td>
+</tr>
+<tr>
+<td><code>it's our turn to save the lake[ENV],</code></td>
+<td>輪到我們來保護這座湖 <code>[ENV]</code>，</td>
+</tr>
+<tr>
+<td><code>joined a fight to save their forests[ENV],</code></td>
+<td>加入保護他們的森林 <code>[ENV]</code> 的抗爭，</td>
+</tr>
+<tr>
+<td><code>can we get busy to save the planet[ENV]?</code></td>
+<td>我們能不能開始行動，拯救這個星球 <code>[ENV]</code>？</td>
+</tr>
+</tbody>
+</table></div>
+<p>如果在替這 65 條 <em>save … from</em> 索引行加上標籤之前，我們先查看關聯比表，可能就會注意到 <em>save … forests</em> 的數值非常大，顯示這裡可能有一個重要模式。事實上，這個模式很可能涵蓋了圖 2 所見 <code>save [ANIMAL]</code> 模式的大部分實例。因此，這些表格雖然不直接提供語意標籤，卻能為詞典編纂者提供許多有力提示，指出選擇語意標籤集合時，需要解釋哪些現象。</p>
+<p>本文關於 <em>save</em> 與其他詞的所有敘述，可能只適用於 1987 年的美式新聞文體。不過，從直覺上看，所發現的許多模式似乎都很有可能是一般英語的慣常用法。未來可以檢視其他更平衡的語料庫，測試這些模式在其中是否仍然成立。</p>
+<p class="figure-caption" id="figure-2"><strong>圖 2　1987 年 AP 語料庫中，經粗略分類的部分 <code>save … from</code> 索引行</strong></p>
+<p>整體模式：<code>save X from Y</code>，共 65 條索引行。</p>
+<p><strong>1. <code>save PERSON from Y</code>：使人免於 Y（23 條索引行）</strong></p>
+<p><strong>1.1 <code>save PERSON from BAD</code>：使人免於不利事物（19 條索引行）</strong></p>
+<div aria-label="語料例句對照" class="table-scroll" role="region" tabindex="0"><table aria-label="語料例句對照" class="examples-table">
+<thead>
+<tr>
+<th scope="col">原文索引行</th>
+<th scope="col">中文翻譯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(Robert DeNiro) to save Indian tribes[PERSON] from genocide[DESTRUCT[BAD]] at the hands of …</code></td>
+<td>（Robert DeNiro）要拯救原住民部落 <code>[PERSON]</code>，使其免遭……之手的種族滅絕 <code>[DESTRUCT[BAD]]</code>。</td>
+</tr>
+<tr>
+<td><code>“We wanted to save him[PERSON] from undue trouble[BAD] and loss[BAD] of money,”</code></td>
+<td>「我們想讓他 <code>[PERSON]</code> 免於不必要的麻煩 <code>[BAD]</code> 與金錢損失 <code>[BAD]</code>。」</td>
+</tr>
+<tr>
+<td><code>Murphy was sacrificed to save more powerful Democrats[PERSON] from harm[BAD].</code></td>
+<td>Murphy 被犧牲，以保護更有權勢的民主黨人 <code>[PERSON]</code> 免受傷害 <code>[BAD]</code>。</td>
+</tr>
+<tr>
+<td><code>“God sent this man to save my five children[PERSON] from being burned to death[DESTRUCT[BAD]] and …</code></td>
+<td>「上帝派這個人來救我的五個孩子 <code>[PERSON]</code>，使他們免於被燒死 <code>[DESTRUCT[BAD]]</code>，並且……」</td>
+</tr>
+<tr>
+<td><code>Pope John Paul II to “save us[PERSON] from sin[BAD].”</code></td>
+<td>教宗若望保祿二世要「拯救我們 <code>[PERSON]</code> 脫離罪惡 <code>[BAD]</code>」。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>1.2 <code>save PERSON from (BAD) LOC(ATION)</code>：把人從（不利的）地點救出（4 條索引行）</strong></p>
+<div aria-label="語料例句對照" class="table-scroll" role="region" tabindex="0"><table aria-label="語料例句對照" class="examples-table">
+<thead>
+<tr>
+<th scope="col">原文索引行</th>
+<th scope="col">中文翻譯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rescuers who helped save the toddler[PERSON] from an abandoned well[LOC] will be feted with a parade</code></td>
+<td>協助將幼童 <code>[PERSON]</code> 從廢棄水井 <code>[LOC]</code> 救出的救難人員，將獲得遊行表揚。</td>
+</tr>
+<tr>
+<td><code>while attempting to save two drowning boys[PERSON] from a turbulent[BAD] creek[LOC] in Ohio[LOC]</code></td>
+<td>在試圖將兩名溺水男孩 <code>[PERSON]</code> 從俄亥俄州 <code>[LOC]</code> 一條水勢湍急 <code>[BAD]</code> 的溪流 <code>[LOC]</code> 中救出時……</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>2. <code>save INST(ITUTION) from (ECON) BAD</code>：使機構免於（經濟上的）不利事物（27 條索引行）</strong></p>
+<div aria-label="語料例句對照" class="table-scroll" role="region" tabindex="0"><table aria-label="語料例句對照" class="examples-table">
+<thead>
+<tr>
+<th scope="col">原文索引行</th>
+<th scope="col">中文翻譯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>member states to help save the EEC[INST] from possible bankruptcy[ECON][BAD] this year.</code></td>
+<td>成員國協助歐洲經濟共同體 <code>[INST]</code>，避免它在今年可能面臨的破產 <code>[ECON][BAD]</code>。</td>
+</tr>
+<tr>
+<td><code>should be sought “to save the company[CORP[INST]] from bankruptcy[ECON][BAD].”</code></td>
+<td>應予尋求，「以挽救公司 <code>[CORP[INST]]</code>，使其免於破產 <code>[ECON][BAD]</code>」。</td>
+</tr>
+<tr>
+<td><code>law was necessary to save the country[NATION[INST]] from disaster[BAD].</code></td>
+<td>這項法律是必要的，能拯救國家 <code>[NATION[INST]]</code> 免於災難 <code>[BAD]</code>。</td>
+</tr>
+<tr>
+<td><code>operation “to save the nation[NATION[INST]] from Communism[BAD][POLITICAL].”</code></td>
+<td>一項「拯救國家 <code>[NATION[INST]]</code> 免於共產主義 <code>[BAD][POLITICAL]</code>」的行動。</td>
+</tr>
+<tr>
+<td><code>were not needed to save the system from bankruptcy[ECON][BAD].</code></td>
+<td>不需要……就能挽救這個體系，使其免於破產 <code>[ECON][BAD]</code>。</td>
+</tr>
+<tr>
+<td><code>his efforts to save the world[INST] from the likes of Lothar and the Spider Woman</code></td>
+<td>他努力拯救世界 <code>[INST]</code>，使其免遭 Lothar、蜘蛛女之流的危害。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>3. <code>save ANIMAL from DESTRUCT(ION)</code>：使動物免於毀滅（5 條索引行）</strong></p>
+<div aria-label="語料例句對照" class="table-scroll" role="region" tabindex="0"><table aria-label="語料例句對照" class="examples-table">
+<thead>
+<tr>
+<th scope="col">原文索引行</th>
+<th scope="col">中文翻譯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>give them the money to save the dogs[ANIMAL] from being destroyed[DESTRUCT],</code></td>
+<td>給他們錢，讓那些狗 <code>[ANIMAL]</code> 免遭撲殺 <code>[DESTRUCT]</code>，</td>
+</tr>
+<tr>
+<td><code>program intended to save the giant birds[ANIMAL] from extinction[DESTRUCT],</code></td>
+<td>旨在使這些巨型鳥類 <code>[ANIMAL]</code> 免於滅絕 <code>[DESTRUCT]</code> 的計畫，</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>未分類（10 條索引行）</strong></p>
+<div aria-label="語料例句對照" class="table-scroll" role="region" tabindex="0"><table aria-label="語料例句對照" class="examples-table">
+<thead>
+<tr>
+<th scope="col">原文索引行</th>
+<th scope="col">中文翻譯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>walnut and ash trees to save them from the axes and saws of a logging company.</code></td>
+<td>…胡桃樹與梣樹，使它們免遭伐木公司的斧頭與鋸子砍伐。</td>
+</tr>
+<tr>
+<td><code>after the attack to save the ship from a terrible[BAD] fire, Navy reports concluded Thursday.</code></td>
+<td>海軍報告週四下了結論：…攻擊之後，為了將船從一場可怕 <code>[BAD]</code> 的火災中救出……</td>
+</tr>
+<tr>
+<td><code>certificates that would save shoppers[PERSON] anywhere from $50[MONEY] [NUMBER] to $500[MONEY] [NU…</code></td>
+<td>讓購物者 <code>[PERSON]</code> 可省下 50 美元 <code>[MONEY] [NUMBER]</code> 至 500 美元 <code>[MONEY] [NU…</code> 不等金額的券。</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="translator-note" role="note">
+<p>譯註：圖中語意標記沿用原文：<code>PERSON</code>＝人，<code>BAD</code>＝不利事物，<code>DESTRUCT</code>＝毀滅，<code>LOC</code>＝地點，<code>INST</code>＝機構，<code>CORP</code>＝公司，<code>NATION</code>＝國家，<code>ECON</code>＝經濟，<code>POLITICAL</code>＝政治，<code>ANIMAL</code>＝動物，<code>MONEY</code>＝金錢，<code>NUMBER</code>＝數量。最後一列的標記在原圖右緣截斷，未予補齊。</p>
+</blockquote>
+</section><section aria-labelledby="section-9"><h2 id="section-9" tabindex="-1"><span class="section-number">9</span>結論</h2>
+<p>本文從心理語言學的詞語聯想常模概念出發，將它延伸至資訊理論中的互資訊定義。這提供了一種精確的統計計算方法，能應用於極大型文本語料庫，產生包含數萬個詞的關聯表。接著，我們展示了這張表如何記錄許多相當值得研究的模式，從 <em>doctor … nurse</em> 到 <em>save … from</em> 都包括在內。最後，我們說明關聯比表中的模式，如何協助詞典編纂者整理語料索引。</p>
+<p>事實上，我們得到這些結果的過程，基本上與本文的敘述順序相反。語料索引分析仍然極為耗費人力，也很容易發生遺漏。語料索引的排序方式，無法充分支援目前的詞典編纂實務。雖然語料索引是以單一詞為索引鍵，詞典編纂者實際上卻往往利用第二個詞，例如 <em>from</em>，或者像時間副詞語這種同樣常見的語意概念，來決定如何分類索引行。換句話說，他們利用兩個詞來對詞義進行「三角定位」（triangulate）。這種三角定位方法，主要根據用法，也就是分布證據，將索引行聚集為不同詞義，而不是依據對意義的直覺。因此，即使標籤集合看起來帶有語意值，「什麼構成一個詞義」這個問題，仍可用句法方法（符號操作）來處理，而不必處理語意（詮釋）。</p>
+<p>三角定位方法需要「技藝」。詞典編纂者如何判定哪些潛在的切分依據值得關注，哪些只是偶然造成的？我們提出的關聯比分數，提供了一種實用而客觀的量度，往往能相當接近這種「技藝」的判斷。由於這項量度是客觀的，它可以系統性地應用於大量資料，持續提升一致性與生產力。</p>
+<p>不過，客觀分數也可能造成誤導。分數只考慮分布證據。例如，這項量度給 <em>set … for</em> 的評價高於 <em>set … down</em>；它不知道前者較不值得關注，因為其語意具有組合性，可以由組成部分推得。此外，這項量度非常表面；如果沒有 Church 的詞性程式或 Hindle 的剖析器這類明確的前處理，它就無法把詞語聚集為適當的句法類別。然而，這兩種前處理都無法凸顯 <em>picture</em> 與 <em>photograph</em> 這類名詞之間「自然」的相似性。雖然我們或許能設想某種對這個特定例子有幫助的前處理，但很可能永遠存在一類概括性規律：對有判斷力的詞典編纂者而言顯而易見，卻完全超出電腦客觀處理所能掌握的範圍。</p>
+<p>儘管有這些問題，關聯比仍可能成為協助詞典編纂者的重要工具，作用有點像語料索引的索引。它可以幫助我們決定該找什麼，並迅速概述我們的詞語究竟與哪些詞相伴出現。</p>
+</section><section aria-labelledby="references"><h2 id="references" tabindex="-1">參考文獻</h2>
+<ol>
+<li>
+<p>Church, K. 1988. “A Stochastic Parts Program and Noun Phrase Parser for Unrestricted Text.”〔〈用於非受限文本的隨機式詞性程式與名詞片語剖析器〉〕<em>Second Conference on Applied Natural Language Processing</em>，Austin, TX。</p>
+</li>
+<li>
+<p>Church, K.; Gale, W.; Hanks, P.; and Hindle, D. 1989. “Parsing, Word Associations and Typical Predicate-Argument Relations.”〔〈句法剖析、詞語關聯與典型述詞—論元關係〉〕<em>International Workshop on Parsing Technologies</em>，CMU。</p>
+</li>
+<li>
+<p>Fano, R. 1961. <em>Transmission of Information: A Statistical Theory of Communications</em>.〔《資訊傳輸：通訊的統計理論》〕MIT Press，Cambridge, MA。</p>
+</li>
+<li>
+<p>Firth, J. 1957. “A Synopsis of Linguistic Theory 1930–1955.”〔〈1930–1955 年語言學理論概要〉〕收錄於 <em>Studies in Linguistic Analysis</em>〔《語言分析研究》〕，Philological Society，Oxford；重印於 Palmer, F.（編），1968，<em>Selected Papers of J. R. Firth</em>〔《J. R. Firth 論文選集》〕，Longman，Harlow。</p>
+</li>
+<li>
+<p>Francis, W. and Kučera, H. 1982. <em>Frequency Analysis of English Usage</em>.〔《英語用法頻率分析》〕Houghton Mifflin Company，Boston, MA。</p>
+</li>
+<li>
+<p>Good, I. J. 1953. “The Population Frequencies of Species and the Estimation of Population Parameters.”〔〈物種的母體頻率與母體參數估計〉〕<em>Biometrika</em>，第 40 卷，第 237–264 頁。</p>
+</li>
+<li>
+<p>Hanks, P. 1987. “Definitions and Explanations.”〔〈定義與解釋〉〕收錄於 J. Sinclair（編），<em>Looking Up: An Account of the COBUILD Project in Lexical Computing</em>〔《查詞：COBUILD 詞彙計算計畫紀實》〕，Collins，London and Glasgow。</p>
+</li>
+<li>
+<p>Hindle, D. 1983a. “Deterministic Parsing of Syntactic Non-fluencies.”〔〈句法不流暢現象的確定性剖析〉〕收錄於 <em>Proceedings of the 23rd Annual Meeting of the Association for Computational Linguistics</em>〔《計算語言學協會第 23 屆年會論文集》〕。</p>
+</li>
+<li>
+<p>Hindle, D. 1983b. “User Manual for Fidditch, a Deterministic Parser.”〔《確定性剖析器 Fidditch 使用手冊》〕Naval Research Laboratory Technical Memorandum #7590-142。</p>
+</li>
+<li>
+<p>Hornby, A. 1948. <em>The Advanced Learner's Dictionary</em>.〔《高階學習者詞典》〕Oxford University Press，Oxford, U.K.。</p>
+</li>
+<li>
+<p>Jelinek, F. 1982. 個人通訊。</p>
+</li>
+<li>
+<p>Kahan, S.; Pavlidis, T.; and Baird, H. 1987. “On the Recognition of Printed Characters of any Font or Size.”〔〈論任意字型或尺寸之印刷字元的辨識〉〕<em>IEEE Transactions PAMI</em>，第 274–287 頁。</p>
+</li>
+<li>
+<p>Meyer, D.; Schvaneveldt, R.; and Ruddy, M. 1975. “Loci of Contextual Effects on Visual Word-Recognition.”〔〈上下文對視覺詞語辨識的影響作用於何處〉〕收錄於 P. Rabbitt 與 S. Dornic（編），<em>Attention and Performance V</em>〔《注意力與表現》第五卷〕，Academic Press，New York。</p>
+</li>
+<li>
+<p>Palermo, D. and Jenkins, J. 1964. “Word Association Norms.”〔《詞語聯想常模》〕University of Minnesota Press，Minneapolis, MN。</p>
+</li>
+<li>
+<p>Sinclair, J.; Hanks, P.; Fox, G.; Moon, R.; and Stock, P.（編）1987a. <em>Collins Cobuild English Language Dictionary</em>.〔《Collins Cobuild 英語詞典》〕Collins，London and Glasgow。</p>
+</li>
+<li>
+<p>Sinclair, J. 1987b. “The Nature of the Evidence.”〔〈證據的性質〉〕收錄於 J. Sinclair（編），<em>Looking Up: An Account of the COBUILD Project in Lexical Computing</em>〔《查詞：COBUILD 詞彙計算計畫紀實》〕，Collins，London and Glasgow。</p>
+</li>
+<li>
+<p>Smadja, F. 即將出版。 “Microcoding the Lexicon with Co-Occurrence Knowledge.”〔〈以共現知識對詞庫進行微觀編碼〉〕收錄於 Zernik（編），<em>Lexical Acquisition: Using On-Line Resources to Build a Lexicon</em>〔《詞彙擷取：利用線上資源建置詞庫》〕，MIT Press，Cambridge, MA。</p>
+</li>
+</ol>
+<blockquote class="translator-note" role="note">
+<p>譯註：以上書目依原稿保留。正文或註釋另提及 Aho 等人（1988）、Sinclair（1987c）及 Katz（1987），但原稿的參考文獻未列出這三筆資料。</p>
+</blockquote>
+</section><section aria-labelledby="notes"><h2 id="notes" tabindex="-1">原文註釋</h2>
+<hr class="footnotes-sep"/>
+<section class="footnotes">
+<ol class="footnotes-list">
+<li class="footnote-item" id="fn1" role="doc-endnote"><p>IBM 語音研究團隊也曾使用這項統計量（Jelinek，1982），為語音辨識應用建構語言模型。 <a aria-label="回到註釋 1 的引用位置" class="footnote-backref" href="#fnref1" role="doc-backlink">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn2" role="doc-endnote"><p>Smadja（即將出版）以非常相近的方式討論搭配詞之間的距離。 <a aria-label="回到註釋 2 的引用位置" class="footnote-backref" href="#fnref2" role="doc-backlink">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn3" role="doc-endnote"><p>這個 <span class="math inline">f_w(x,y)</span> 的定義使用矩形視窗。值得考慮其他形式，例如三角形視窗或指數衰減，讓詞語之間隔得愈遠，權重就愈低。也可以採用其他視窗。例如，Hindle（Church 等人，1989）曾利用句法剖析器，選取特定目標構式中的詞。 <a aria-label="回到註釋 3 的引用位置" class="footnote-backref" href="#fnref3" role="doc-backlink">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn4" role="doc-endnote"><p>雖然 Good–Turing 方法（Good，1953）已提出超過 35 年，至今仍被大量引用。例如，Katz（1987）使用此方法來估計 IBM 語音辨識器中的三元詞組（trigram）機率。對於訓練語料庫中很少出現的三元詞組，Good–Turing 方法很有幫助。 <a aria-label="回到註釋 4 的引用位置" class="footnote-backref" href="#fnref4" role="doc-backlink">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn5" role="doc-endnote"><p>最後一條未分類的索引行，<code>… save shoppers anywhere from $50 …</code>，帶來值得研究的問題。句法「區塊切分」（chunking）顯示，雖然這一行裡 <em>from</em> 與 <em>save</em> 共現，它並不屬於這個類別。考慮到我們正嘗試建構的對照表，一項值得探討的課題，是如何避免這類錯誤推論：因為 <em>shoppers</em> 被標記為 <code>[PERSON]</code>，所以此處的 <em>$50 to $500</em> 就一定得算是 <code>BAD</code> 或 <code>LOCATION</code>。不過，這類偶然巧合不會對量度造成顯著影響，但它們提醒了我們：這些發現具有機率性質。 <a aria-label="回到註釋 5 的引用位置" class="footnote-backref" href="#fnref5" role="doc-backlink">↩︎</a></p>
+</li>
+<li class="footnote-item" id="fn6" role="doc-endnote"><p><em>Time</em> 這個詞本身在表中也有顯著的出現情形，但仔細檢視後可以清楚看出，這裡的 <em>time</em> 用法（例如 <em>to save time</em>〔節省時間〕），應算是某種商品或資源，而不是時間附加語的一部分。這就是詞典編纂中的陷阱；一旦被指出來，就會顯得很明顯。 <a aria-label="回到註釋 6 的引用位置" class="footnote-backref" href="#fnref6" role="doc-backlink">↩︎</a></p>
+</li>
+</ol>
+</section>
+</section>
+        </div>
+        <footer class="paper-footer">
+          <span>Church &amp; Hanks · 1990 · CC BY-NC-SA 3.0</span>
+          <a class="back-to-top" href="#top">回到頁首 ↑</a>
+        </footer>
+      </article>
+    </main>
+  </div>
+  <script>
+(() => {
+  "use strict";
+
+  const toc = document.querySelector(".toc");
+  const mobile = window.matchMedia("(max-width: 1000px)");
+  const links = [...document.querySelectorAll(".toc a")];
+  const headings = links.map(link => document.getElementById(link.hash.slice(1)));
+  const progress = document.querySelector(".reading-progress");
+  const percentage = document.getElementById("reading-percent");
+  const printButton = document.querySelector(".print-button");
+
+  function updateTocLayout() {
+    toc.open = !mobile.matches;
+  }
+  updateTocLayout();
+  mobile.addEventListener("change", updateTocLayout);
+
+  links.forEach(link => {
+    link.addEventListener("click", event => {
+      if (!mobile.matches) return;
+      event.preventDefault();
+      toc.open = false;
+      // Close the mobile contents before calculating the anchor position.
+      const target = document.getElementById(link.hash.slice(1));
+      window.location.hash = link.hash;
+      target.scrollIntoView({ block: "start" });
+      target.focus({ preventScroll: true });
+    });
+  });
+
+  printButton.hidden = false;
+  printButton.addEventListener("click", () => window.print());
+  document.querySelector(".read-status").hidden = false;
+
+  let framePending = false;
+  function updateReadingPosition() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+    progress.style.transform = `scaleX(${ratio})`;
+    percentage.textContent = `${Math.round(ratio * 100)}%`;
+    let current = -1;
+    headings.forEach((heading, index) => {
+      if (heading.getBoundingClientRect().top <= 180) current = index;
+    });
+    links.forEach((link, index) => {
+      if (index === current) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+    framePending = false;
+  }
+  function schedulePositionUpdate() {
+    if (framePending) return;
+    framePending = true;
+    window.requestAnimationFrame(updateReadingPosition);
+  }
+  window.addEventListener("scroll", schedulePositionUpdate, { passive: true });
+  window.addEventListener("resize", schedulePositionUpdate);
+  updateReadingPosition();
+
+  let notesWereOpen;
+  const notes = document.querySelector(".translation-notes");
+  window.addEventListener("beforeprint", () => {
+    notesWereOpen = notes.open;
+    notes.open = true;
+  });
+  window.addEventListener("afterprint", () => {
+    notes.open = notesWereOpen;
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.katex) {
+      document.querySelectorAll(".math").forEach(element => {
+        katex.render(element.textContent.trim(), element, {
+          displayMode: element.classList.contains("block"),
+          throwOnError: false,
+          output: "htmlAndMathml"
+        });
+      });
+    }
+    // Revisit an anchor after equations and fonts have changed the layout.
+    document.fonts.ready.then(() => {
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (target) target.scrollIntoView({ block: "start", behavior: "instant" });
+      updateReadingPosition();
+    });
+  });
+})();
+
+  </script>
+</body>
+</html>
